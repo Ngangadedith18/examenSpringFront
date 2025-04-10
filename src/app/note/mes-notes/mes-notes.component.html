@@ -1,0 +1,29 @@
+<div class="notes-container">
+  <h2>Mes Notes</h2>
+
+  <table *ngIf="notes.length > 0">
+    <thead>
+      <tr>
+        <th>Matière</th>
+        <th>Note</th>
+        <th>Crédit</th>
+        <th>Semestre</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let note of notes">
+        <td>{{ note.matiere }}</td>
+        <td>{{ note.valeur }}</td>
+        <td>{{ note.credit }}</td>
+        <td>{{ note.semestre }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div *ngIf="notes.length === 0" class="no-notes">
+    Aucune note disponible pour le moment.
+  </div>
+  <div class="back-button-container">
+    <button (click)="goBack()" class="back-btn">⬅️ Retour</button>
+  </div>  
+</div>

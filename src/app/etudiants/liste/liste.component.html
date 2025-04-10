@@ -1,0 +1,116 @@
+<app-header></app-header>
+<app-side-bar></app-side-bar>
+<div class="container">
+  <h2>Gestion des Étudiants</h2>
+  <div class="action-bar">
+    <input type="text" [(ngModel)]="searchQuery" placeholder="Rechercher..." (input)="filterEtudiants()" >
+    <button class="add-btn" (click)="openAddForm()">Ajouter un étudiant</button>
+  </div>
+
+  <table>
+    <thead>
+    <tr>
+      <th>ID</th>
+      <th>Nom d'utilisateur</th>
+      <!--<th>Mot de passe</th>-->
+      <th>Nom</th>
+      <th>Prénom</th>
+      <th>Niveau</th>
+      <th>Filière</th>
+      <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let etudiant of filteredEtudiants">
+      <td>{{ etudiant.id }}</td>
+      <td>{{ etudiant.username }}</td>
+      <!--<td>{{ etudiant.password }}</td>-->
+      <td>{{ etudiant.nom }}</td>
+      <td>{{ etudiant.prenom }}</td>
+      <td>{{ etudiant.niveau }}</td>
+      <td>{{ etudiant.filiere }}</td>
+      <td class="actions">
+        <button class="edit-btn" (click)="editEtudiant(etudiant)">Modifier</button>
+        <button class="delete-btn" (click)="deleteEtudiant(etudiant.id)">Supprimer</button>
+      </td>
+    </tr>
+    <tr *ngIf="filteredEtudiants.length === 0">
+      <td colspan="6">Aucun étudiant trouvé</td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- Formulaire d'ajout -->
+<div class="modal" *ngIf="showAddForm">
+  <div class="modal-content">
+    <h3>Ajouter un nouvel étudiant</h3>
+    <form (ngSubmit)="addEtudiant()">
+      <div class="form-group">
+        <label>Login :</label>
+        <input type="text" [(ngModel)]="newEtudiant.username" name="nom" required>
+      </div>
+      <div class="form-group">
+        <label>Mot de passe :</label>
+        <input type="text" [(ngModel)]="newEtudiant.password" name="nom" required>
+      </div>
+      <div class="form-group">
+        <label>Nom:</label>
+        <input type="text" [(ngModel)]="newEtudiant.nom" name="nom" required>
+      </div>
+      <div class="form-group">
+        <label>Prénom:</label>
+        <input type="text" [(ngModel)]="newEtudiant.prenom" name="prenom" required>
+      </div>
+      <div class="form-group">
+        <label>Niveau:</label>
+        <select [(ngModel)]="newEtudiant.niveau" name="niveau" required>
+          <option *ngFor="let niveau of niveaux" [value]="niveau">{{ niveau }}</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Filière:</label>
+        <select [(ngModel)]="newEtudiant.filiere" name="filiere" required>
+          <option *ngFor="let filiere of filieres" [value]="filiere">{{ filiere }}</option>
+        </select>
+      </div>
+      <div class="form-actions">
+        <button type="button" class="cancel-btn" (click)="cancelForm()">Annuler</button>
+        <button type="submit" class="submit-btn">Enregistrer</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Formulaire de modification -->
+<div class="modal" *ngIf="showEditForm">
+  <div class="modal-content">
+    <h3>Modifier l'étudiant</h3>
+    <form (ngSubmit)="updateEtudiant()">
+      <div class="form-group">
+        <label>Nom:</label>
+        <input type="text" [(ngModel)]="selectedEtudiant.nom" name="nom" required>
+      </div>
+      <div class="form-group">
+        <label>Prénom:</label>
+        <input type="text" [(ngModel)]="selectedEtudiant.prenom" name="prenom" required>
+      </div>
+      <div class="form-group">
+        <label>Niveau:</label>
+        <select [(ngModel)]="selectedEtudiant.niveau" name="niveau" required>
+          <option *ngFor="let niveau of niveaux" [value]="niveau">{{ niveau }}</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Filière:</label>
+        <select [(ngModel)]="selectedEtudiant.filiere" name="filiere" required>
+          <option *ngFor="let filiere of filieres" [value]="filiere">{{ filiere }}</option>
+        </select>
+      </div>
+      <div class="form-actions">
+        <button type="button" class="cancel-btn" (click)="cancelForm()">Annuler</button>
+        <button type="submit" class="submit-btn">Mettre à jour</button>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,54 @@
+<aside class="sidebar">
+  <!-- Sidebar header -->
+  <div class="sidebar-header">
+    <img src="/afi.png" alt="Logo" class="logo">
+  </div>
+
+  <!-- Sidebar menu -->
+  <ul>
+    <li>
+      <a routerLink="/dashboard">
+        <mat-icon>dashboard</mat-icon>
+        Tableau de bord
+      </a>
+    </li>
+
+    <!-- Afficher 'Gestion des Étudiants' et 'Gestion des Notes' uniquement si le rôle est 'SECRETAIRE' -->
+    <li *ngIf="userRole === 'Secretaire'">
+      <a routerLink="/etudiants">
+        <mat-icon>school</mat-icon>
+        Gestion des Étudiants
+      </a>
+    </li>
+    <li *ngIf="userRole === 'Secretaire'">
+      <a routerLink="/note">
+        <mat-icon>grade</mat-icon>
+        Gestion des Notes
+      </a>
+    </li>
+
+    <!-- Afficher 'Mes Notes' pour tous les utilisateurs -->
+    <li *ngIf="userRole === 'Etudiant'">
+      <a routerLink="/mes-notes">
+        <mat-icon>grade</mat-icon>
+        Mes Notes
+      </a>
+    </li>
+    
+    <li>
+      <a [routerLink]="['/profile', username]">
+        <mat-icon>person</mat-icon>
+        Mon profil
+      </a>
+    </li>
+
+    <!-- Afficher le bouton de déconnexion pour tous les utilisateurs -->
+    <li>
+      <a (click)="onLogout()">
+        <mat-icon>logout</mat-icon>
+        Déconnexion
+      </a>
+      <p *ngIf="message" style="color: red;">{{ message }}</p>
+    </li>
+  </ul>
+</aside>

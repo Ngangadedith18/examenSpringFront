@@ -1,0 +1,125 @@
+<app-header></app-header>
+<app-side-bar></app-side-bar>
+<div class="container">
+  <h2>Liste des Notes</h2>
+  <div class="action-bar">
+    <input type="text" [(ngModel)]="searchQuery" placeholder="Rechercher..." (input)="filterNotes()">
+    <button class="add-btn" (click)="openAddModal()"> Ajouter une note</button>
+  </div>
+
+  <table class="note-table">
+    <thead>
+      <tr>
+        <th>ID Note</th>
+        <th>Matière</th>
+        <th>Valeur</th>
+        <th>Crédit</th>
+        <th>Semestre</th>
+        <!--<th>ID Étudiant</th>-->
+        <th>Nom</th>
+        <th>Prénom</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let note of filteredNotes">
+        <td>{{ note.idN }}</td>
+        <td>{{ note.matiere }}</td>
+        <td>{{ note.valeur }}</td>
+        <td>{{ note.credit }}</td>
+        <td>{{ note.semestre }}</td>
+        <!--<td>{{ note.etudiant.id }}</td>-->
+        <td>{{ note.etudiant.nom }}</td>
+        <td>{{ note.etudiant.prenom }}</td>
+        <td class="actions">
+          <button class="edit-btn" (click)="openEditModal(note)"> Modifier</button>
+          <button class="delete-btn" (click)="openDeleteModal(note)"> Supprimer</button>
+        </td>
+      </tr>
+      <tr *ngIf="filteredNotes.length === 0">
+        <td colspan="7">Aucune note trouvée</td>
+      </tr>
+      </tbody>
+  </table>
+</div>
+
+<!-- Modale Ajout -->
+<div class="modal" *ngIf="showAddModal">
+  <div class="modal-content">
+    <span class="close" (click)="closeModal()">&times;</span>
+    <h3>Ajouter une nouvelle note</h3>
+    <form (ngSubmit)="addNote()">
+      <div class="form-group">
+        <label>Matière</label>
+        <input type="text" [(ngModel)]="newNote.matiere" name="matiere" required>
+      </div>
+      <div class="form-group">
+        <label>Valeur</label>
+        <input type="number" [(ngModel)]="newNote.valeur" name="valeur" step="0.01" min="0" max="20" required>
+      </div>
+      <div class="form-group">
+        <label>Crédit</label>
+        <input type="number" [(ngModel)]="newNote.credit" name="credit" required>
+      </div>
+      <div class="form-group">
+        <label>Semestre</label>
+        <input type="text" [(ngModel)]="newNote.semestre" name="semestre" required>
+      </div>
+      <div class="form-group">
+        <label>ID Étudiant</label>
+        <input type="number" [(ngModel)]="newNote.idE" name="idE" required>
+      </div>
+      <div class="form-actions">
+        <button type="button" class="cancel-btn" (click)="closeModal()">Annuler</button>
+        <button type="submit" class="submit-btn">Enregistrer</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Modale Modification -->
+<div class="modal" *ngIf="showEditModal">
+  <div class="modal-content">
+    <span class="close" (click)="closeModal()">&times;</span>
+    <h3>Modifier la note</h3>
+    <form (ngSubmit)="updateNote()">
+      <div class="form-group">
+        <label>Matière</label>
+        <input type="text" [(ngModel)]="selectedNote.matiere" name="matiere" required>
+      </div>
+      <div class="form-group">
+        <label>Valeur</label>
+        <input type="number" [(ngModel)]="selectedNote.valeur" name="valeur" step="0.01" min="0" max="20" required>
+      </div>
+      <div class="form-group">
+        <label>Crédit</label>
+        <input type="number" [(ngModel)]="selectedNote.credit" name="credit" required>
+      </div>
+      <div class="form-group">
+        <label>Semestre</label>
+        <input type="text" [(ngModel)]="selectedNote.semestre" name="semestre" required>
+      </div>
+      <div class="form-group">
+        <label>ID Étudiant</label>
+        <input type="number" [(ngModel)]="selectedNote.idE" name="idE" required>
+      </div>
+      <div class="form-actions">
+        <button type="button" class="cancel-btn" (click)="closeModal()">Annuler</button>
+        <button type="submit" class="submit-btn">Mettre à jour</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Modale Suppression -->
+<div class="modal" *ngIf="showDeleteModal">
+  <div class="modal-content">
+    <span class="close" (click)="closeModal()">&times;</span>
+    <h3>Confirmer la suppression</h3>
+    <p>Êtes-vous sûr de vouloir supprimer la note de {{selectedNote.matiere}} ?</p>
+    <div class="form-actions">
+      <button type="button" class="cancel-btn" (click)="closeModal()">Annuler</button>
+      <button type="button" class="delete-confirm-btn" (click)="confirmDelete()">Confirmer</button>
+    </div>
+  </div>
+</div>

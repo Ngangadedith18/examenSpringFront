@@ -1,0 +1,60 @@
+h2 {
+  margin-left: 320px;
+  margin-top: 80px;
+  color: #3498db;
+}
+
+.rectangles {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  width: 900px;
+  margin: 0 auto;
+  margin-right: 60px;
+  margin-top: 25px;
+}
+
+.rectangle {
+  padding: 50px;
+  border: 1px solid #ddd;
+  border-left: 8px solid;
+  border-radius:0 15px 15px 0;
+  background-color: #fff;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.rectangle a {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: inherit;
+  gap: 10px;
+  font-weight: bold;
+}
+
+.rectangle a mat-icon {
+  font-size: 24px;
+}
+
+.rectangle:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+/* Couleurs différentes pour les bordures */
+.red {
+  border-left-color: #e74c3c; /* rouge */
+}
+
+.blue {
+  border-left-color: #3498db; /* bleu */
+}
+
+.green {
+  border-left-color: #2ecc71; /* vert */
+}
+
+.pink{
+  border-left-color: palevioletred;
+}

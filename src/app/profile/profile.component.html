@@ -1,0 +1,30 @@
+<app-header></app-header>
+<app-side-bar></app-side-bar>
+
+<div class="profile-container" *ngIf="user">
+
+    <h2>Mes informations</h2>
+    <div class="separator"></div>
+  
+    <!-- Affichage pour Secretaire -->
+    <div *ngIf="userRole === 'Secretaire'">
+      <p><strong>Nom d'utilisateur :</strong> {{ user.username }}</p>
+      <p><strong>Poste :</strong> Secrétaire</p>
+      <p><strong>Bureau :</strong> {{ user.bureau }}</p>
+      <p><strong>Téléphone :</strong> {{ user.telephone }}</p>
+    </div>
+  
+    <!-- Affichage pour Etudiant -->
+    <div *ngIf="userRole === 'Etudiant'">
+      <p><strong>Nom d'utilisateur :</strong> {{ user.username }}</p>
+      <p><strong>Status :</strong> Etudiant</p>
+      <p><strong>Nom :</strong> {{ user.nom }}</p>
+      <p><strong>Prénom :</strong> {{ user.prenom }}</p>
+      <p><strong>Niveau :</strong> {{ user.niveau }}</p>
+      <p><strong>Filière :</strong> {{ user.filiere }}</p>
+    </div>
+  
+    <button (click)="goBack()" class="back-button">Retour au Dashboard</button>
+  
+  </div>
+  

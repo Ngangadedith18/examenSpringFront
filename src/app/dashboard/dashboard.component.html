@@ -1,0 +1,59 @@
+<app-header></app-header>
+<app-side-bar></app-side-bar>
+<div class="dashboard-container">
+    <h2>Menu du Dashboard</h2>
+    
+    <ng-container *ngIf="userRole === 'Secretaire'">
+      <div class="rectangles">
+        <div class="rectangle red">
+          <a routerLink="/etudiants">
+            <mat-icon>school</mat-icon>
+            <span>Accedez à la gestion de vos étudiants</span>
+          </a> <br>
+          <p>Nous vous demandons de faire preuve de transparence et de responsabilité dans la gestion de vos étudiants</p>
+        </div>
+    
+        <div class="rectangle blue">
+          <a routerLink="/note">
+            <mat-icon>grade</mat-icon>
+            <span>Accedez à la gestion des notes de vos étudiants</span>
+          </a> <br>
+          <p>Nous vous prions de faire preuve de transparence et de responsabilité dans la gestion des notes de vos étudiants</p>
+        </div>
+      </div>
+
+      <div class="rectangles">
+        <div class="rectangle pink">
+          <a [routerLink]="['/profile', username]">
+            <mat-icon>person</mat-icon>
+            <span>Accedez à la totalité de vos informations personnelles</span>
+          </a> <br>
+          <p>Vos informations sont disponibles ici, merci de faire preuve de discrétion, de transparence et de responsabilité</p>
+        </div>
+      </div>
+    </ng-container>
+    
+    <ng-container *ngIf="userRole === 'Etudiant'">
+      <div class="rectangles">
+        <div class="rectangle green">
+          <a routerLink="/mes-notes">
+            <mat-icon>grade</mat-icon>
+            <span>Accedez à la totalité de vos notes</span>
+          </a> <br>
+          <p>Vos notes sont disponibles ici, merci de faire preuve de transparence et de responsabilité</p>
+        </div>
+      </div>
+
+      <div class="rectangles">
+        <div class="rectangle pink">
+          <a [routerLink]="['/profile', username]">
+            <mat-icon>person</mat-icon>
+            <span>Accedez à la totalité de vos informations personnelles</span>
+          </a> <br>
+          <p>Vos informations sont disponibles ici, merci de faire preuve de discrétion, de transparence et de responsabilité</p>
+        </div>
+      </div>
+    </ng-container>
+    
+</div>
+  
